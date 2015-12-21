@@ -1,0 +1,31 @@
+{% extends "contentrequest/base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+
+{% block title %}
+    {% trans "Nouvelle requête" %}
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+    <li>{% trans "Nouvelle requête" %}</li>
+{% endblock %}
+
+
+
+{% block headline %}
+    {% trans "Nouvelle requête" %}
+{% endblock %}
+
+{% block content %}
+
+    <form class="clearix" method="post" action="{% url 'request-new' %}">
+    	{% csrf_token %}
+    	{% crispy form %}
+        <input type="submit" value="Créer" />
+    </form>
+
+{% endblock %}

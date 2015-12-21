@@ -1,0 +1,39 @@
+{% extends "contentrequest/base.html" %}
+{% load i18n %}
+{% load date %}
+
+
+{% block title %}
+    {% trans "Liste des requêtes" %}
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+    <li>{% trans "Liste des requêtes" %}</li>
+{% endblock %}
+
+
+
+{% block headline %}
+    <h1>{% trans "Liste des requêtes" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "misc/pagination.part.html" with position="top" %}
+    {% if requests %}
+        <meta itemprop="itemListOrder" content="Unordered">
+        {% for request in requests %}
+            <article class="tutorial-help-item">
+                <div class="tutorial-infos no-illu">
+                    <a href="{{ request.get_absolute_url }}"><h3>{{ request.title }}</h3></a>
+                    <p>{{ request.subtitle }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>Aucune requête.</p>
+    {% endif %}
+
+    {% include "misc/pagination.part.html" with position="bottom" %}
+{% endblock %}
