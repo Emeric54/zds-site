@@ -2,9 +2,9 @@
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-
 from django.db import models
 
+from zds.utils.models import Comment
 
 class Request(models.Model):
 
@@ -36,3 +36,16 @@ class Request(models.Model):
         :rtype: str
         """
 		return reverse('request-details', args=[self.pk])
+
+class RequestReaction(Comment):
+	"""
+	A comment written by any user about a ContentRequest he just read 
+	"""
+	class Meta:
+		verbose_name = 'note sur une requête'
+		verbose_name_plural = 'notes sur une requêtes'
+
+	related_request = models.ForeignKey(Request, verbose_name='Requête', related_name='related_request_note', db_index=True)
+
+	def __unicode__(self):
+		return u'<Requête pour "{0}", #{1}>'.format(self.related_request, self.pk)
