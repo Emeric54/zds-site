@@ -29,7 +29,6 @@ def home(request):
     tutos = []
     for tuto in get_last_tutorials():
         data = tuto
-
         tutos.append(data)
 
     articles = []

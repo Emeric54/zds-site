@@ -1,9 +1,12 @@
 # coding: utf-8
+from datetime import datetime
+
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, ButtonHolder
 from django import forms
 from django.core.urlresolvers import reverse
+from django.forms.extras.widgets import SelectDateWidget
 from django.utils.translation import ugettext_lazy as _
 
 from zds.featured.models import FeaturedResource, FeaturedMessage
@@ -13,7 +16,7 @@ class FeaturedResourceForm(forms.ModelForm):
     class Meta:
         model = FeaturedResource
 
-        fields = ['title', 'type', 'authors', 'image_url', 'url']
+        fields = ['title', 'type', 'authors', 'image_url', 'url', 'pubdate']
 
         widgets = {
             'title': forms.TextInput(
@@ -44,7 +47,9 @@ class FeaturedResourceForm(forms.ModelForm):
                 attrs={
                     'placeholder': _(u'Lien vers la ressource.')
                 }
-            )
+            ),
+
+            'pubdate': SelectDateWidget()
         }
 
     major_update = forms.BooleanField(
@@ -67,10 +72,21 @@ class FeaturedResourceForm(forms.ModelForm):
             Field('image_url'),
             Field('url'),
             Field('major_update'),
+            Field('pubdate'),
             ButtonHolder(
                 StrictButton(_(u'Enregistrer'), type='submit'),
             ),
         )
+
+    def clean(self):
+        cleaned_data = super(FeaturedResourceForm, self).clean()
+        if "pubdate" not in cleaned_data or not cleaned_data["pubdate"]:
+            cleaned_data["pubdate"] = datetime.now()
+        else:
+            date = cleaned_data["pubdate"]
+            cleaned_data['pubdate'] = max(datetime.now(), datetime(date.year, date.month, date.day))
+
+        return cleaned_data
 
 
 class FeaturedMessageForm(forms.ModelForm):

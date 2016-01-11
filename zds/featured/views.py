@@ -25,7 +25,7 @@ class FeaturedResourceList(ZdSPagingListView):
 
     context_object_name = 'featured_resource_list'
     paginate_by = settings.ZDS_APP['featured_resource']['featured_per_page']
-    queryset = FeaturedResource.objects.all().order_by('-pubdate')
+    queryset = FeaturedResource.objects.order_by('-pubdate')
     template_name = 'featured/index.html'
 
     @method_decorator(login_required)
@@ -63,7 +63,7 @@ class FeaturedResourceCreate(CreateView):
         featured_resource.authors = form.data.get('authors')
         featured_resource.image_url = form.data.get('image_url')
         featured_resource.url = form.data.get('url')
-        featured_resource.pubdate = datetime.now()
+        featured_resource.pubdate = form.data.get('url')
         featured_resource.save()
 
         return redirect(reverse('featured-resource-list'))
