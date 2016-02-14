@@ -11,10 +11,8 @@ from django.views.generic.detail import DetailView
 from django.http import JsonResponse
 
 from zds import settings
-from zds.poll.forms import (PollForm, PollInlineFormSet,
-    ChoiceFormSetHelper, UpdatePollForm, get_vote_form)
-from zds.poll.models import (Poll, MultipleVote,
-    UNIQUE_VOTE_KEY, MULTIPLE_VOTE_KEY, UniqueVote)
+from zds.poll.forms import PollForm, PollInlineFormSet, ChoiceFormSetHelper, UpdatePollForm, get_vote_form
+from zds.poll.models import Poll, MultipleVote, UNIQUE_VOTE_KEY, MULTIPLE_VOTE_KEY, UniqueVote
 from zds.member.decorator import LoginRequiredMixin
 from zds.utils import slugify
 from zds.utils.paginator import ZdSPagingListView
