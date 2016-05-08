@@ -139,7 +139,7 @@ def alert_authors():
             if author not in users and author not in bots:
                 users.append(author)
     for user in users:
-        msg = 'Bonjour {0},\n\nDepuis la dernière version de Zeste de Savoir, tous les contenus (articles, tutoriels ' \
+        msg = 'Bonjour,\n\nDepuis la dernière version de Zeste de Savoir, tous les contenus (articles, tutoriels ' \
               'et bientôt tribunes libres) possèdent maintenant une nouvelle classification ([ZEP-25](https://zestede' \
               'savoir.com/forums/sujet/2378/zep-25-categorisation-des-articles-et-tutoriels/)). Les **tags** ont fait' \
               ' leur apparition et les catégories ont été revues afin de faciliter et d\'aléger cette classification.' \
