@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.renderers import JSONRenderer
 
 from zds.poll.api.serializers import PollListSerializer, PollDetailSerializer
 from zds.poll.models import Poll
@@ -13,5 +14,10 @@ class PollListAPIView(ListAPIView):
 
 
 class PollDetailAPIView(RetrieveAPIView):
-    serializer_class = PollDetailSerializer
+
     queryset = Poll.objects.all()
+    serializer_class = PollDetailSerializer
+    renderer_classes = (JSONRenderer,)
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)

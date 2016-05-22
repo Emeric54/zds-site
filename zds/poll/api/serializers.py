@@ -5,9 +5,11 @@ from zds.poll.models import Poll, Choice
 
 class ChoiceSerializer(serializers.ModelSerializer):
 
+    votes = serializers.IntegerField(source='get_count_votes')
+
     class Meta:
         model = Choice
-        fields = ('pk', 'choice')
+        fields = ('pk', 'choice', 'votes')
 
 
 class PollListSerializer(serializers.ModelSerializer):
@@ -22,4 +24,4 @@ class PollDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = ('pk', 'title', 'choices')
+        fields = ('pk', 'title', 'enddate', 'choices')
