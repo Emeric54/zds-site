@@ -19,5 +19,3 @@ class PollDetailAPIView(RetrieveAPIView):
     serializer_class = PollDetailSerializer
     renderer_classes = (JSONRenderer,)
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
