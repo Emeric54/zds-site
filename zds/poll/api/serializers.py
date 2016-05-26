@@ -24,4 +24,4 @@ class PollDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = ('pk', 'title', 'enddate', 'choices')
+        fields = ('pk', 'title', 'anonymous_vote', 'type_vote', 'enddate', 'choices')
