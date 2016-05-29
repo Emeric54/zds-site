@@ -1,15 +1,17 @@
 from rest_framework import serializers
 
+from zds.member.api.serializers import UserListSerializer
 from zds.poll.models import Poll, Choice
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
 
     votes = serializers.IntegerField(source='get_count_votes')
+    users = UserListSerializer(source='get_users', many=True, read_only=True)
 
     class Meta:
         model = Choice
-        fields = ('pk', 'choice', 'votes')
+        fields = ('pk', 'choice', 'votes', 'users')
 
 
 class PollListSerializer(serializers.ModelSerializer):

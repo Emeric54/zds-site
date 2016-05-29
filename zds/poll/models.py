@@ -131,6 +131,13 @@ class Choice(models.Model):
         count = self.poll.get_vote_class().objects.filter(choice=self, poll=self.poll).count()
         return count
 
+    def get_users(self):
+        """
+        :return: Users
+        :rtype a dict
+        """
+        return [Vote.user for Vote in self.poll.get_vote_class().objects.filter(choice=self, poll=self.poll)]
+
 
 class Vote(models.Model):
 
