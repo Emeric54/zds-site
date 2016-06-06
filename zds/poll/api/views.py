@@ -4,8 +4,8 @@
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.renderers import JSONRenderer
 
-from zds.poll.api.serializers import PollDetailSerializer
-from zds.poll.models import Poll
+from zds.poll.api.serializers import PollDetailSerializer, UsersSerializers
+from zds.poll.models import Poll, Choice
 
 
 class PollDetailAPIView(RetrieveAPIView):
@@ -14,3 +14,8 @@ class PollDetailAPIView(RetrieveAPIView):
     serializer_class = PollDetailSerializer
     renderer_classes = (JSONRenderer,)
 
+
+class UsersDetailAPIView(RetrieveAPIView):
+
+    queryset = Choice.objects.all()
+    serializer_class = UsersSerializers
