@@ -138,6 +138,9 @@ class Choice(models.Model):
         """
         return [Vote.user for Vote in self.poll.get_vote_class().objects.filter(choice=self, poll=self.poll)]
 
+    def set_user_vote(self, user):
+        UniqueVote.objects.update_or_create(user=user, choice=self, poll=self.poll)
+
 
 class Vote(models.Model):
 
