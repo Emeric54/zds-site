@@ -1,0 +1,15 @@
+{%  extends "base.html" %}
+
+{% load i18n %}
+
+{%  block breadcrumb_base %}
+    <li>Sondage</li>
+{%  endblock %}
+
+{%  block sidebar %}
+    <aside class="sidebar mobile-menu-hide">
+        <a href="#" class="new-btn icon-after more blue">
+            {% trans "Retour au billet" %}
+        </a>
+    </aside>
+{%  endblock %}

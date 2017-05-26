@@ -261,6 +261,14 @@
         {% endif %}
         {# END AUTHORS #}
 
+        {# POLL #}
+        <li>
+            <a href="{%  url "poll:poll-new" %}?contenu=1" class="new-btn ico-after more blue">
+                {% trans "Ajouter un sondage" %}
+            </a>
+        </li>
+        {# END POLL #}
+
         {# BETA #}
         {% if content.can_be_in_beta %}
             {% if not content.in_beta %}

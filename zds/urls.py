@@ -101,6 +101,7 @@ urlpatterns = [
     url(r'^munin/', include('zds.munin.urls')),
     url(r'^mise-en-avant/', include('zds.featured.urls')),
     url(r'^notifications/', include('zds.notification.urls')),
+    url(r'^sondages/', include('zds.poll.urls', namespace='poll')),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
 
@@ -125,6 +126,13 @@ if settings.SERVE:
         url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
         url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += (
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
 
 # custom view for 500 errors
 handler500 = 'zds.pages.views.custom_error_500'

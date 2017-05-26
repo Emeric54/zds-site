@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Nouveau sondage" %}
+{% endblock %}
+
+{% block headline %}
+    {%  trans "Nouveau sondage" %}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'content:find-opinion' user.pk %}">{% trans "Tribune de" %} {{ user.username }}</a></li>
+    <li><a href="{{ content.get_absolute_url }}">{{ content.title }}</a></li>
+    <li>Nouveau sondage</li>
+{% endblock %}
+
+{% block content %}
+
+    <form class="clearix" method="post" action="{% url 'poll:poll-new' %}?contenu={{ content.id }} ">
+        {% csrf_token %}
+        {% crispy form %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{% trans "Créer" %}</button>
+            <button id="add-form-choice" type="button" class="btn btn-grey">{% trans "Ajouter un choix" %}</button>
+        </div>
+    </form>
+{% endblock %}
+
